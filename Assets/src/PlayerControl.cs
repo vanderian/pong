@@ -4,7 +4,8 @@ namespace src
 {
     public class PlayerControl : MonoBehaviour
     {
-        public float speed = 10.0f;
+        public float speed = 5;
+
         private Rigidbody2D _body;
 
         public void Start()

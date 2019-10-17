@@ -13,7 +13,7 @@ namespace src
             Invoke(nameof(Init), 1);
         }
 
-        private void OnCollisionEnter2D(Collision2D coll)
+        public void OnCollisionEnter2D(Collision2D coll)
         {
             if (!coll.collider.CompareTag("Player")) return;
 
@@ -21,13 +21,13 @@ namespace src
             _body.velocity = new Vector2(v.x, (v.y) + (coll.collider.attachedRigidbody.velocity.y / 2));
         }
 
-        private void NewGame()
+        public void NewGame()
         {
             ResetBall();
             Invoke(nameof(Init), 2);
         }
 
-        private void ResetBall()
+        public void ResetBall()
         {
             _body.velocity = Vector2.zero;
             transform.position = Vector3.zero;

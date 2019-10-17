@@ -260,7 +260,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 419247870}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 8c5d85f3d788ca725b561527643102f9, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -947,7 +947,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1615649835}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b22864d1f0d8639b95eb7c727486868, type: 3}
+  m_Script: {fileID: 11500000, guid: d9a2ddf77829b0343b6d15bdf75bdeaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
