@@ -951,6 +951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  level: 10
 --- !u!50 &1615649837
 Rigidbody2D:
   serializedVersion: 4
@@ -1106,7 +1107,7 @@ GameObject:
   - component: {fileID: 2001591244}
   m_Layer: 0
   m_Name: HUD
-  m_TagString: Untagged
+  m_TagString: hud
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1123,6 +1124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edbdb3f3914b4f9c08632eb0f363a5ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endScore: 10
   layout: {fileID: 11400000, guid: b3f81b9bb9570cd5d84b7253c7a76ee9, type: 2}
 --- !u!4 &2001591245
 Transform:
