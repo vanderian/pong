@@ -3,7 +3,7 @@ using Api;
 using Grpc.Core;
 using UnityEngine;
 
-namespace src.Client
+namespace Client
 {
     public class LeaderBoardApi : MonoBehaviour
     {

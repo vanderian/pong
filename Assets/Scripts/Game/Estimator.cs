@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace src
+namespace Game
 {
     public class Estimator
     {
