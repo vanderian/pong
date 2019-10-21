@@ -1,12 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Game
 {
     public class AiControl : MonoBehaviour
     {
         public float speed = 5;
-        public float level = 10f;
-        
+
+        private float _level;
+        private float _target;
         private Estimator _estimator;
         private Rigidbody2D _ball;
         private Rigidbody2D _body;
@@ -14,6 +17,7 @@ namespace Game
 
         public void Start()
         {
+            ResetLevel();
             _body = GetComponent<Rigidbody2D>();
             _ball = GameObject.FindGameObjectWithTag("ball").GetComponent<Rigidbody2D>();
             var top = GameObject.Find("WallTop").GetComponent<BoxCollider2D>();
@@ -28,18 +32,38 @@ namespace Game
             if (_ball.velocity.x >= 0)
             {
                 MoveToPoint(0);
+                _time = 1000;
                 return;
             }
 
-            _time += Time.fixedDeltaTime;
-            if (_time < level * 0.05) return;
-            _time = 0;
-
             var x = transform.position.x;
             var y = _estimator.EstimatePosition(x);
+            Estimator.DebugRectangle(new Vector2(x, y), 0.1f, Color.red);
+
             y = Error(y);
             Estimator.DebugRectangle(new Vector2(x, y), 0.1f, Color.green);
-            MoveToPoint(y);
+
+            _time += Time.fixedDeltaTime;
+            if (_time > _level * 0.1)
+            {
+                _target = y;
+                _time = 0;
+            }
+
+            ;
+
+            MoveToPoint(_target);
+        }
+
+        public void ResetLevel()
+        {
+            _level = 10f;
+        }
+
+        public void IncreaseLevel()
+        {
+            _level -= 0.1f;
+            _level = Mathf.Max(_level, 0);
         }
 
         private float Error(float y)
@@ -47,8 +71,9 @@ namespace Game
             var x = transform.position.x;
             var w = Mathf.Abs(x * 2);
             var c = (_ball.position.x - x) / w;
-            var error = level * 0.5f * c;
-            return y + Random.Range(-error, error);
+            var error = _level * c * 2f;
+            var newY = y + Random.Range(-error, error);
+            return newY;
         }
 
         private void MoveToPoint(float target, float offset = 0.2f)

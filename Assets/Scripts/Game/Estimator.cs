@@ -8,8 +8,6 @@ namespace Game
         private readonly Rigidbody2D _ball;
         private readonly float _height;
 
-        public static bool IsDebug = false;
-
         public Estimator(Rigidbody2D ball, float height)
         {
             _ball = ball;

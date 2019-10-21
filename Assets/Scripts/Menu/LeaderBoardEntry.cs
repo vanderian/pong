@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Api;
+using TMPro;
 using UnityEngine;
 
 namespace Menu
@@ -8,5 +9,12 @@ namespace Menu
         public TextMeshProUGUI rank;
         public TextMeshProUGUI playerName;
         public TextMeshProUGUI score;
+
+        public void SetRank(PlayerScore playerScore)
+        {
+            rank.text = $"{playerScore.Rank}";
+            playerName.text = playerScore.Name;
+            score.text = $"{playerScore.Score}";
+        }
     }
 }

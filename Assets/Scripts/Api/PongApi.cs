@@ -1,16 +1,15 @@
 using System;
-using Api;
 using Grpc.Core;
 using UnityEngine;
 
-namespace Client
+namespace Api
 {
-    public class LeaderBoardApi : MonoBehaviour
+    public class PongApi : MonoBehaviour
     {
-        public string serverIp = "http://localhost:5000";
-        
+        public string serverIp = "127.0.0.1:5000";
+
         private Channel _channel;
-        private LeaderBoard.LeaderBoardClient _client;
+        private PongApiService.PongApiServiceClient _client;
 
         public void Start()
         {
@@ -18,19 +17,21 @@ namespace Client
             CreateClient();
         }
 
-        public void CreateChannel()
+        private void CreateChannel()
         {
             _channel = new Channel(serverIp, ChannelCredentials.Insecure);
+            Debug.Log("channel created");
         }
 
-        public void CreateClient()
+        private void CreateClient()
         {
             if (_channel == null)
                 return;
 
             try
             {
-                _client = new LeaderBoard.LeaderBoardClient(_channel);
+                _client = new PongApiService.PongApiServiceClient(_channel);
+                Debug.Log("client connected");
             }
             catch (Exception e)
             {
@@ -38,8 +39,9 @@ namespace Client
             }
         }
 
-        public LeaderBoard.LeaderBoardClient GetClient()
+        public PongApiService.PongApiServiceClient GetClient()
         {
+            Debug.Log($"get client {_client}");
             return _client;
         }
     }
