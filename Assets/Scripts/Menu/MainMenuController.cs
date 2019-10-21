@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Api;
 using Google.Protobuf.WellKnownTypes;
@@ -90,11 +91,18 @@ namespace Menu
 
         private void PopulateList()
         {
-            var scores = _api.GetClient().GetScores(new Empty());
-            for (int i = 0; i < scores.Scores.Count; i++)
+            var id = Prefs.GetPlayerId();
+            var scores = _api.GetClient().GetScores(new Empty()).Scores.ToList();
+            if (!scores.Exists(s => s.Id == id))
             {
-                _leaderBoardEntries[i].SetRank(scores.Scores[i]);
-                Debug.Log($"LB entry {scores.Scores[i]}");
+                if (scores.Count == 10) scores.RemoveAt(9);
+                scores.Add(_api.GetClient().GetScore(new PlayerId() {Id = id}));
+            }
+
+            for (int i = 0; i < scores.Count; i++)
+            {
+                _leaderBoardEntries[i].SetRank(scores[i]);
+                Debug.Log($"LB entry {scores[i]}");
             }
         }
 
