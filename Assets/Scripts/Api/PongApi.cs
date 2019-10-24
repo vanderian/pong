@@ -6,8 +6,7 @@ namespace Api
 {
     public class PongApi : MonoBehaviour
     {
-        public string serverIp = "127.0.0.1:5000";
-
+        public int port = 5000;
         private Channel _channel;
         private PongApiService.PongApiServiceClient _client;
 
@@ -19,7 +18,7 @@ namespace Api
 
         private void CreateChannel()
         {
-            _channel = new Channel(serverIp, ChannelCredentials.Insecure);
+            _channel = new Channel($"127.0.0.1:{port}", ChannelCredentials.Insecure);
             Debug.Log("channel created");
         }
 
